@@ -1,15 +1,16 @@
-function minMeetingRoomsII(intervals) {
-  const startTimes = intervals
-    .map((interval) => interval[0])
-    .sort((a, b) => a - b);
-  const endTimes = intervals
-    .map((interval) => interval[1])
-    .sort((a, b) => a - b);
-  let rooms = 0;
-  let endIdx = 0;
-  for (let i = 0; i < startTimes.length; i++) {
-    if (startTimes[i] < endTimes[endIdx]) rooms++;
-    else endIdx++;
+function combine(n, k) {
+  const result = [];
+  backtrack(1, []);
+  return result;
+  function backtrack(start, current) {
+    if (current.length === k) {
+      result.push([...current]);
+      return;
+    }
+    for (let i = start; i <= n; i++) {
+      current.push(i);
+      backtrack(i + 1, current);
+      current.pop();
+    }
   }
-  return rooms;
 }
