@@ -1,16 +1,21 @@
-function combine(n, k) {
-  const result = [];
-  backtrack(1, []);
-  return result;
-  function backtrack(start, current) {
-    if (current.length === k) {
-      result.push([...current]);
+function getPermutation(n, k) {
+  const nums = Array.from({ length: n }, (_, i) => i + 1);
+  let result = "";
+  let count = 0;
+  const backtrack = (current) => {
+    if (current.length === n) {
+      count++;
+      if (count === k) result = current.join("");
       return;
     }
-    for (let i = start; i <= n; i++) {
-      current.push(i);
-      backtrack(i + 1, current);
+    if (count >= k) return;
+    for (const num of nums) {
+      if (current.includes(num)) continue;
+      current.push(num);
+      backtrack(current);
       current.pop();
     }
-  }
+  };
+  backtrack([]);
+  return result;
 }
