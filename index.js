@@ -1,14 +1,8 @@
-function subarraySum(nums, k) {
-  const map = new Map();
-  map.set(0, 1);
-  let count = 0;
-  let sum = 0;
-  for (const num of nums) {
-    sum += num;
-    if (map.has(sum - k)) {
-      count += map.get(sum - k);
-    }
-    map.set(sum, (map.get(sum) || 0) + 1);
-  }
-  return count;
+function minDepth(root) {
+  if (!root) return 0;
+  if (!root.left && !root.right) return 1;
+  let min = Infinity;
+  if (root.left) min = Math.min(min, minDepth(root.left));
+  if (root.right) min = Math.min(min, minDepth(root.right));
+  return min + 1;
 }
